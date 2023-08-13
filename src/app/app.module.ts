@@ -7,6 +7,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { IssuesManagerComponent } from './issues-manager/issues-manager.component';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {RestService} from "./rest-service.service";
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
     NgbModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [RestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

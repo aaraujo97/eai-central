@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RestService} from "../rest-service.service";
+import {FacilitatorService} from "../facilitator.service";
 
 @Component({
   selector: 'app-navbar',
@@ -11,9 +11,11 @@ export class NavbarComponent {
   collapsed;
   apps;
   selectedApp = '';
-  constructor(private client: RestService) {
-    this.collapsed = true;
+  facilitator: FacilitatorService;
 
+  constructor(service: FacilitatorService) {
+    this.collapsed = true;
+    this.facilitator = service;
     //temp hardcoded list
     this.apps = [
       "LIFTR",
@@ -21,16 +23,12 @@ export class NavbarComponent {
       "Distributed_Project_2022",
       "This one wont work"
     ]
+
+    this.selectedApp = this.apps[0];
+    this.facilitator.setPage(this.selectedApp);
   }
-    getRepos(): void{
-      // will get repositories belonging to owner x
-    }
-
-    onApplicationClick(app: string){
-      this.client.getIssues(app);
-    }
-
-
-
-
+  onApplicationClick(app: string) {
+      this.selectedApp = app;
+      this.facilitator.setPage(this.selectedApp);
+  }
 }

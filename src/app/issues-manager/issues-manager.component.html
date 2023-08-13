@@ -1,1 +1,63 @@
-<p>issues-manager works!</p>
+<h2 class=" accordion-title text-center my-4">Issues</h2>
+<!-- Button trigger modal -->
+
+<div class="row justify-content-center">
+  <button type="button" class="btn btn-outline-success new-issue-btn" data-bs-toggle="modal" data-bs-target="#newIssueModal">
+    New Issue
+  </button>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="newIssueModal" tabindex="-1" aria-labelledby="newIssueModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h1 class="modal-title fs-5 " id="newIssueModalLabel">New Issue for {{currentPage}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="issueTitle" class="form-label">Issue Title</label>
+            <input type="text" class="form-control" id="issueTitle" aria-describedby="title">
+            <div id="titleHelp" class="form-text">Try to keep titles as concise as possible.</div>
+          </div>
+          <div class="mb-3">
+            <label for="issueDescription" class="form-label">Description</label>
+            <textarea class="form-control" id="issueDescription" rows="5"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-outline-success">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div ngbAccordion *ngIf="!componentIsLoading()" class="issue-accordion mx-auto mt-5">
+    <div ngbAccordionItem *ngFor="let issue of issues; let i = index" class="bg-dark text-bg-dark" [collapsed]="i != 0">
+      <h2 ngbAccordionHeader>
+        <button ngbAccordionButton> {{issue.title}}</button>
+      </h2>
+      <div ngbAccordionCollapse>
+        <div ngbAccordionBody [innerHTML]=sanitizedMarkdown[i]></div>
+        <div class="container accordion-footer">
+          <div class="row">
+            <div class="hr mx-auto"></div>
+          </div>
+          <div class="row d-flex ">
+            <button type="button" class="btn btn-outline-danger close-issue-btn">
+              Mark as Resolved
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center" *ngIf="componentIsLoading()">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>

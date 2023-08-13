@@ -1,0 +1,19 @@
+.issue-manager-container {
+  display: flex;
+  align-items: stretch; /* Ensures child elements take full height */
+}
+
+
+.vr {
+  border-left: 2px solid #ddd; /* Gray color for example */
+  height: 90%;
+  margin-left: 10px; /* Spacing to the left */
+}
+
+.hr {
+  border-top: 2px solid #ddd;  /* Gray color for example */
+  width: 90%; /* Ensuring it takes the full width of its container */
+  margin-top: 15px; /* Spacing to the top */
+  margin-bottom: 15px;
+}
+
