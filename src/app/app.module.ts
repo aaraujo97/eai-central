@@ -8,13 +8,17 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { IssuesManagerComponent } from './issues-manager/issues-manager.component';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {RestService} from "./rest-service.service";
+import { NewIssueModalComponent } from './issues-manager/new-issue-modal/new-issue-modal.component';
+import { IssueCreationStatusAlertComponent } from './issues-manager/issue-creation-status-alert/issue-creation-status-alert.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    IssuesManagerComponent
+    IssuesManagerComponent,
+    NewIssueModalComponent,
+    IssueCreationStatusAlertComponent
   ],
   imports: [
     BrowserModule,

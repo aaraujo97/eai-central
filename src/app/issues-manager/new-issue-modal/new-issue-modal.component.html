@@ -1,0 +1,18 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New issue for {{appName}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        body
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-success" (click)="onSubmit(modal)">Submit</button>
+  </div>
+</ng-template>
+
+<button class="btn btn-md btn-success" (click)="open(content)">Create New Issue</button>

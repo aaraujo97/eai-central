@@ -1,0 +1,5 @@
+<p *ngIf="isSuccess() && isDisplayed">
+    <ngb-alert [dismissible]="true" [type]="types[0]" (closed)="isDisplayed = false">
+        Issue successfully created
+    </ngb-alert>
+</p>

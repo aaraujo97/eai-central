@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, SecurityContext} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, SecurityContext} from '@angular/core';
 import {RestService} from "../rest-service.service";
 import {IssuesResponseItem} from "./issue-response-model";
 import {FacilitatorService} from "../facilitator.service";
@@ -15,6 +15,9 @@ export class IssuesManagerComponent implements OnInit,OnDestroy {
   issues: IssuesResponseItem[] = [];
   markdown: string[] = [];
   sanitizedMarkdown: SafeHtml[] = [];
+  newIssueDismissalReason!: string;
+
+  @Output() newIssueDismissalReasonEvent = new EventEmitter<string>();
 
   facilitator: FacilitatorService;
   sanitizer: DomSanitizer;
@@ -23,9 +26,12 @@ export class IssuesManagerComponent implements OnInit,OnDestroy {
   firstRender: boolean = true;
   titleIsLoading: boolean = true;
   bodyIsLoading: boolean = true;
-
+  newIssueSubmitted: boolean = false;
   facilitatorSubscription: Subscription | undefined;
   clientSubscription: Subscription | undefined;
+
+
+
   constructor(private client: RestService,
               private service: FacilitatorService,
               private janitor: DomSanitizer) {
@@ -55,7 +61,6 @@ export class IssuesManagerComponent implements OnInit,OnDestroy {
       this.fetchIssues();
       this.fetchMarkdown();
   }
-
   fetchIssues() {
     this.titleIsLoading = true;
     this.clientSubscription = this.client.getIssues(this.currentPage).subscribe(
@@ -103,6 +108,14 @@ componentIsLoading(): boolean {
       return true;
     return false
 }
+
+  receiveNewIssueModalDismissalReason($event: string)
+  {
+    this.newIssueDismissalReason = $event;
+    this.newIssueSubmitted = true;
+    console.log("Parent says, reason is now: ", this.newIssueDismissalReason)
+  }
+
   ngOnDestroy() {
     if (this.clientSubscription)
     {
